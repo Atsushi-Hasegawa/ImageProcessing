@@ -11,4 +11,8 @@ sudo yum -y install ImageMagick-devel
 ```
 gem install rmagick
 ```
+- rspecをインストール
+```
+gem install rspec
+```
 
