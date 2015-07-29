@@ -18,3 +18,7 @@ gem install rspec
 - RMagickの仕様書
  - http://www.simplesystems.org/RMagick/doc/constants.html#CompositeOperator
 
+- rekognitionをインストール
+```
+gem install rekognition
+```
