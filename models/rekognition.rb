@@ -17,9 +17,11 @@ module Rekognition
     end
   end
 
-  def face_detect(uri, job)
+  def face_detect(uri, job='face_search')
     begin
+      uri = uri.to_s
       @client.face_detect(urls: uri, jobs: job)
+      raise "ERROR! No image URL " + uri
     rescue => e
       e.message
     end
