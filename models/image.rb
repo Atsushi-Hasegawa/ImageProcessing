@@ -28,8 +28,8 @@ class Image
     end
   end
 
-  def do_graffiti(scale, width, height, x, y, font)
-    @draw.annotate(scale, width, height, x, y, 'hogehoge') do
+  def do_graffiti(scale, width, height, x, y, font, graffiti)
+    @draw.annotate(scale, width, height, x, y, graffiti) do
       self.font = font
       self.fill =  'blue'
       self.stroke = 'transparent'
