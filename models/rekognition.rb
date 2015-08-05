@@ -19,9 +19,29 @@ module Rekognition
 
   def face_detect(uri, job='face_search')
     begin
-      uri = uri.to_s
-      @client.face_detect(urls: uri, jobs: job)
-      raise "ERROR! No image URL " + uri
+      url = uri.to_s
+      puts job
+      face_position = @client.face_detect(urls: url, jobs: job)
+      if !face_position.include?('face_detection')
+        raise "ERROR! No image URL " + url
+      end
+      face_position
+    rescue => e
+      e.message
+    ensure
+      face_position
+    end
+  end
+
+  def calculation(x, y)
+    begin
+      sum = []
+      x.each{|position|
+        sum[0] += position
+      }
+      y.each{|position|
+        sum[1] += position
+      }
     rescue => e
       e.message
     end
