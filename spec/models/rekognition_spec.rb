@@ -1,7 +1,7 @@
 !#/bin/env ruby
 
 require '../spec_helper.rb'
-require '../../models/rekognition.rb'
+require '../../models/rekognition'
 
 describe Rekognition do
   path = '../../../api.yaml'
@@ -12,6 +12,6 @@ describe Rekognition do
   end
   it "test calculation" do
     rekognition = Image.new(path)
-    expect(rekognition.calculation('', 'hoge')).to eq 'Invalid format type'
+    expect(rekognition.calculate(nil, 'hoge')).to eq 'Invalid format type'
   end
 end
