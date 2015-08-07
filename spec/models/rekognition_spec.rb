@@ -10,4 +10,8 @@ describe Rekognition do
     expect(rekognition.face_detect('')).to eq 'ERROR! No image URL '
     expect(rekognition.face_detect(nil)).to eq 'ERROR! No image URL '
   end
+  it "test calculation" do
+    rekognition = Image.new(path)
+    expect(rekognition.calculation('', 'hoge')).to eq 'Invalid format type'
+  end
 end

@@ -20,7 +20,6 @@ module Rekognition
   def face_detect(uri, job='face_search')
     begin
       url = uri.to_s
-      puts job
       face_position = @client.face_detect(urls: url, jobs: job)
       if !face_position.include?('face_detection')
         raise "ERROR! No image URL " + url
@@ -33,15 +32,16 @@ module Rekognition
     end
   end
 
-  def calculation(x, y)
+  def calculation(x, type)
     begin
-      sum = []
+      if !x.instance_of?(Array) 
+        raise "Invalid format type"
+      end
+      sum = 0
       x.each{|position|
-        sum[0] += position
+        sum+= position[type]
       }
-      y.each{|position|
-        sum[1] += position
-      }
+      sum/x.length
     rescue => e
       e.message
     end
@@ -51,3 +51,4 @@ end
 class Image
   include Rekognition
 end
+
