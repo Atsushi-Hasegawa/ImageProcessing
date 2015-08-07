@@ -32,16 +32,16 @@ module Rekognition
     end
   end
 
-  def calculation(x, type)
+  def calculate(coordinate, type)
     begin
-      if !x.instance_of?(Array) 
+      if !coordinate.instance_of?(Array) 
         raise "Invalid format type"
       end
       sum = 0
-      x.each{|position|
+      coordinate.each{|position|
         sum+= position[type]
       }
-      sum/x.length
+      sum/coordinate.length
     rescue => e
       e.message
     end
@@ -51,4 +51,3 @@ end
 class Image
   include Rekognition
 end
-

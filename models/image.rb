@@ -2,12 +2,14 @@
 #!/usr/bin/env ruby
 
 require 'rmagick' # require してライブラリを読み込み
+require_relative 'rekognition'
 
 class Image
-  def initialize(filename)
-    @filename = File::expand_path(filename)
+  include Rekognition
+  def initialize(filename, api_config)
     @img = Magick::ImageList.new(filename)
     @draw = Magick::Draw.new
+    super(api_config)
   end
 
   def effetct_blur(x, y)
@@ -21,7 +23,7 @@ class Image
 
   def resize(x,y)
     begin
-      return @img.resize_to_fit(x,y)
+      @img.resize_to_fit(x,y)
     rescue ArgumentError => ex
       puts ex.message
       return x,y
@@ -39,14 +41,13 @@ class Image
     end
   end
 
-  def composite(x, y, arg, result)
-    begin 
-      arg.each{|file|
+  def composite(x, y, input, output)
+    begin
+      input.each{|file|
         blob_img = Magick::Image.from_blob(File.read(file)).shift
-        scale_img = blob_img.resize(x, y)
-        result = result.composite(scale_img, Magick::SouthEastGravity, Magick::ScreenCompositeOp)
+        output = output.composite(blob_img, x, y, Magick::ScreenCompositeOp)
       }
-      return result
+      output
     rescue ArgumentError => ex
       puts ex.message
       return x, y, arg
