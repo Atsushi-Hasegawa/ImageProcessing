@@ -5,6 +5,9 @@ require '../../models/rekognition'
 
 describe Rekognition do
   path = '../../../api.yaml'
+  class Image
+    include Rekognition
+  end
   it "test load_file" do
     rekognition = Image.new(path)
     expect(rekognition.face_detect('')).to eq 'ERROR! No image URL '

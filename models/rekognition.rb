@@ -47,7 +47,3 @@ module Rekognition
     end
   end
 end
-
-class Image
-  include Rekognition
-end
